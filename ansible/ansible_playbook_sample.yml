@@ -1,0 +1,44 @@
+---
+# How to run this playbook:
+# ansible-playbook ansible_playbook_sample.yml 
+# The name of the play
+- name: Network Getting Started First Playbook
+  # Setting it to not gather facts such as:
+  # TASK [Gathering Facts] *****************************
+  # ok: [localhost]
+  gather_facts: false
+  # hosts is a mandatory field. "all" does not match localhost
+  hosts: localhost
+  vars:
+    app_path: "base_path_value_from_vars"
+    region:
+      - northeast
+      - southeast
+      - midest
+    keyValueVariable:
+      key1: value1
+      key2: value2
+
+  tasks:
+    # name of the task
+    - name: Sample with loop and accessing / creating variables
+      debug:
+        # using the item of the loop
+        # the following is a multine string
+        msg: |
+          This is a simple message {{ item }} .. path: {{ app_path }}
+          Accessing simple variable ... value: {{ app_path }}
+          Accessing array variable ... value: {{ region }}
+          Accessing an item of the array variable ... value: {{ region[0] }}
+          Accessing an item of the key-value variable ... value: {{ keyValueVariable['key1'] }}
+      # loop definition and its items
+      loop:
+        - testmessage1
+        - testmessage2
+      # registering the putput of this task to a variable
+      register: registered_variable
+
+    - name: Output the previously registered variable
+      debug:
+        # using the previously registered variable
+        msg: "{{ registered_variable }}"
