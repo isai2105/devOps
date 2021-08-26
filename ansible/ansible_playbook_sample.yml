@@ -18,6 +18,10 @@
     keyValueVariable:
       key1: value1
       key2: value2
+  vars_files:
+    # relative path to a file containing variables
+    # sensible variable files containing delicate info should not be into git
+    - ansible_variables_to_import.yml
 
   tasks:
     # name of the task
@@ -31,6 +35,7 @@
           Accessing array variable ... value: {{ region }}
           Accessing an item of the array variable ... value: {{ region[0] }}
           Accessing an item of the key-value variable ... value: {{ keyValueVariable['key1'] }}
+          Accessing a variable from an imported file... value: {{ password }}
       # loop definition and its items
       loop:
         - testmessage1
