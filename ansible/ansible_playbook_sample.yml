@@ -1,6 +1,9 @@
 ---
 # How to run this playbook:
 # ansible-playbook ansible_playbook_sample.yml 
+# You can define variables when you run your playbook by passing variables at the command line using the --extra-vars (or -e) argument.
+# Example 1: ansible-playbook release.yml --extra-vars "version=1.23.45 other_variable=foo"
+# Example 2: ansible-playbook arcade.yml --extra-vars '{"pacman":"mrs","ghosts":["inky","pinky","clyde","sue"]}'
 # The name of the play
 - name: Network Getting Started First Playbook
   # Setting it to not gather facts such as:
