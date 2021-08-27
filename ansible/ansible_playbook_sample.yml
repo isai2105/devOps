@@ -1,6 +1,6 @@
 ---
 # How to run this playbook:
-# ansible-playbook ansible_playbook_sample.yml 
+# ansible-playbook ansible_playbook_sample.yml --verbose (optional)
 # You can define variables when you run your playbook by passing variables at the command line using the --extra-vars (or -e) argument.
 # Example 1: ansible-playbook release.yml --extra-vars "version=1.23.45 other_variable=foo"
 # Example 2: ansible-playbook arcade.yml --extra-vars '{"pacman":"mrs","ghosts":["inky","pinky","clyde","sue"]}'
@@ -32,6 +32,8 @@
       debug:
         # using the item of the loop
         # the following is a multine string
+        # note the use of default value for a variable
+        # note how we call a variable "customvar1" from an external inventory
         msg: |
           This is a simple message {{ item }} .. path: {{ app_path }}
           Accessing simple variable ... value: {{ app_path }}
@@ -39,6 +41,7 @@
           Accessing an item of the array variable ... value: {{ region[0] }}
           Accessing an item of the key-value variable ... value: {{ keyValueVariable['key1'] }}
           Accessing a variable from an imported file... value: {{ password }}
+          Accessing a variable from an external inventory... value: {{ customvar1 | default('ERROR - please use "-i inventory" to see the value of this variable') }}
       # loop definition and its items
       loop:
         - testmessage1
@@ -50,3 +53,6 @@
       debug:
         # using the previously registered variable
         msg: "{{ registered_variable }}"
+
+    - name: Leaving a mark
+      command: "touch /tmp/ansible_was_here"
