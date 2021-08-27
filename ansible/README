@@ -1,0 +1,16 @@
+Run with:
+
+"ansible-playbook ansible_playbook_sample.yml"
+OR
+"ansible-playbook ansible_playbook_sample.yml -i inventory" if adding the custom inventory is desired.
+
+To run the playbook and include the definitions of that particular inventory
+The inventory has custom hosts, variables, etc...
+
+This allows us to divide the configuration into environments, for example:
+inventory_prod
+inventory_qa
+inventory_local
+
+Also, there can be several inventories added.
+This means, we could have an inventory with sensible variables or custom variables with personal information 

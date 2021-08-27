@@ -11,7 +11,10 @@
   # ok: [localhost]
   gather_facts: false
   # hosts is a mandatory field. "all" does not match localhost
-  hosts: localhost
+  hosts: 
+    - localhost
+    # notice this hosts group bein included from a custom inventory (-i option)
+    - custom-inventory-hosts
   vars:
     app_path: "base_path_value_from_vars"
     region:
