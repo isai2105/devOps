@@ -1,0 +1,47 @@
+1. Generate the two projects:
+
+
+mvn archetype:generate -DgroupId=com.vogella \
+-DartifactId=com.vogella.maven.api   \
+-DarchetypeArtifactId=maven-archetype-quickstart \
+-DarchetypeVersion=1.4 \
+-DinteractiveMode=false
+
+
+mvn archetype:generate -DgroupId=com.vogella \
+-DartifactId=com.vogella.maven.consumer   \
+-DarchetypeArtifactId=maven-archetype-quickstart \
+-DarchetypeVersion=1.4 \
+-DinteractiveMode=false
+
+
+2. Create the pom.xml in the parent folder and specify the two children modules in it
+
+3. Update each child pom and define the parent relationship, so they can inherit the configuration from the parent
+This config goes inside the <parent> tag
+
+4. The common dependencies and config go in the parent pom.xml file
+
+5. Then, link the voguella api project as a dependency inside the voguella consumer project and run 'mvn clean verify'
+
+6. It works, lets go inside the consumer project and try to run 'mvn clean verify' there. IT FAILS!!
+
+7. From the parent project, run 'mvn clean install', and then try to do the previous steps which failed ... IT WORKS!!
+SO, the dependency is installed in the local repository, thus, this time it can be found.
+
+8. We add the dependency for creating an executable JAR file to the consumer's pom.xml file.
+
+9. You could add other unrelated projects as a module and define the parent relationship as the previous steps.. just to have
+those build in the same build.
+
+10. Using Profiles:
+Notice the tags <profile> in the parent pom.
+There can be many properties being defined based on the profile.
+The example shows custom properties and also the properties: "skipTests".
+Notice that when running: "mvn clean package -Pproduction" it DOES run the tests, as expected.But when running: "mvn clean package -Pdev" or "mvn clean package" it does not (the dev profile is activated by default in the profiles config). 
+
+
+You could then use these properties using ${} .. in exclude / include configurations...
+and get flexibility when using Profiles.
+
+
