@@ -1,0 +1,4 @@
+---
+- name: Output from a role's task
+  debug:
+    msg: "Debug message from a Role's task ... variable value = '{{ customvarfromrole1 }}'"

@@ -14,3 +14,5 @@ inventory_local
 
 Also, there can be several inventories added.
 This means, we could have an inventory with sensible variables or custom variables with personal information 
+
+Run with: --tags "firstTestTag" to only run the task: "Sample with loop and accessing / creating variables", which is the only one tagged with that tag.

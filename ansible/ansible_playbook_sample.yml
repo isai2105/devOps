@@ -15,6 +15,9 @@
     - localhost
     # notice this hosts group bein included from a custom inventory (-i option)
     - custom-inventory-hosts
+  roles:
+    - test-role-1
+
   vars:
     app_path: "base_path_value_from_vars"
     region:
@@ -51,6 +54,7 @@
         - testmessage2
       # registering the putput of this task to a variable
       register: registered_variable
+      tags: [firstTestTag]
 
     - name: Output the previously registered variable
       debug:
